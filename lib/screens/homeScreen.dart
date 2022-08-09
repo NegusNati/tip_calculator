@@ -9,7 +9,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   double _billAmount = 0.0;
   int _personCounter = 1;
-  late int _tipPercentage = 0;
+  late int _tipPercentage = 50;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Text(
                       'Total Per Person',
-                      style: TextStyle(
+                      style: TextStyle( 
                           color: Colors.purple.shade400,
                           fontWeight: FontWeight.bold),
                     ),
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.grey.shade300.withOpacity(0.6),
                     ),
                     Text(
-                      '\$ 90.9',
+                      '\$ ${calculateTotalPerPerson(_billAmount,_personCounter)}',
                       style: kMainLableTextStyle,
                     ),
                   ],
@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Padding(
                         padding: const EdgeInsets.all(18.0),
                         child: Text(
-                          "\$ 50.00",
+                          "\$ ${(calaculateTip(_billAmount, _tipPercentage).toStringAsFixed(2))}",
                           style: TextStyle(
                               color: Colors.purple.shade300,
                               fontWeight: FontWeight.w900,
@@ -231,5 +231,26 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  calculateTotalPerPerson( double billAmount, int splitBy) {
+    double totalTip = calaculateTip(_billAmount, _tipPercentage);
+    double totalPerPerson = 0.0;
+
+    totalPerPerson = (totalTip + billAmount) / splitBy;
+
+    return totalPerPerson.toStringAsFixed(2);
+  }
+
+  calaculateTip(double billAmount, int tipPercentage) {
+    double totalTip = 0.0;
+
+    if (billAmount == 0 || billAmount.toString().isEmpty) {
+      // SnackBar
+    } else {
+      totalTip = (billAmount * tipPercentage) / 100;
+    }
+
+    return totalTip;
   }
 }
