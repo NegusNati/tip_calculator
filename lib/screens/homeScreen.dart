@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Text(
                       'Total Per Person',
-                      style: TextStyle( 
+                      style: TextStyle(
                           color: Colors.purple.shade400,
                           fontWeight: FontWeight.bold),
                     ),
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.grey.shade300.withOpacity(0.6),
                     ),
                     Text(
-                      '\$ ${calculateTotalPerPerson(_billAmount,_personCounter)}',
+                      '\$ ${calculateTotalPerPerson(_billAmount, _personCounter, _tipPercentage)}',
                       style: kMainLableTextStyle,
                     ),
                   ],
@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Padding(
                         padding: const EdgeInsets.all(18.0),
                         child: Text(
-                          "\$ ${(calaculateTip(_billAmount, _tipPercentage).toStringAsFixed(2))}",
+                          "\$ ${calaculateTip(_billAmount, _tipPercentage)}",
                           style: TextStyle(
                               color: Colors.purple.shade300,
                               fontWeight: FontWeight.w900,
@@ -233,13 +233,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  calculateTotalPerPerson( double billAmount, int splitBy) {
-    double totalTip = calaculateTip(_billAmount, _tipPercentage);
+  calculateTotalPerPerson(double billAmount, int splitBy, int totalTip) {
     double totalPerPerson = 0.0;
 
     totalPerPerson = (totalTip + billAmount) / splitBy;
 
-    return totalPerPerson.toStringAsFixed(2);
+    return totalPerPerson;
   }
 
   calaculateTip(double billAmount, int tipPercentage) {
