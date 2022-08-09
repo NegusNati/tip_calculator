@@ -7,6 +7,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   double _billAmount = 0.0;
+  int _personCounter = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,8 +106,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.blueGrey.shade300),
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           InkWell(
+                            onTap: () {
+                              setState(() {
+                                if (_personCounter > 1) {
+                                  _personCounter--;
+                                } else {
+                                  //another SnackBard here
+                                }
+                              });
+                            },
                             child: Container(
                               height: 40.0,
                               width: 40.0,
@@ -115,14 +126,53 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: Colors.grey.shade200,
                               ),
                               child: Center(
-                                  child: Text(
-                                "-",
-                                style: TextStyle(
-                                    color: Colors.purple.shade300,
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 30.0),
-                              )),
+                                child: Text(
+                                  "-",
+                                  style: TextStyle(
+                                      color: Colors.purple.shade300,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 30.0),
+                                ),
+                              ),
                             ),
+                          ),
+                          const SizedBox(
+                            width: 7.0,
+                          ),
+                          Text(
+                            "$_personCounter",
+                            style: const TextStyle(
+                                color: Colors.black54,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 25.0),
+                          ),
+                          const SizedBox(
+                            width: 7.0,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                if (_personCounter < 100) {
+                                  _personCounter++;
+                                } else {
+                                  //another SnackBar here
+                                }
+                              });
+                            },
+                            child: Container(
+                                alignment: Alignment.center,
+                                height: 40.0,
+                                width: 40.0,
+                                decoration: BoxDecoration(
+                                    color: Colors.grey.shade200,
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                child: Text(
+                                  "+",
+                                  style: TextStyle(
+                                      color: Colors.purple.shade300,
+                                      fontSize: 25.0,
+                                      fontWeight: FontWeight.w900),
+                                )),
                           ),
                         ],
                       )
