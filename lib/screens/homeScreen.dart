@@ -14,8 +14,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.all(MediaQuery.of(context).size.height *
-            0.04), //dynamic hight on any device
+        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height *
+            0.08), //dynamic hight on any device
         alignment: Alignment.center,
         color: Colors.white,
         child: ListView(
