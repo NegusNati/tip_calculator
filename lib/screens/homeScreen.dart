@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tip_calculator/utillities/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   double _billAmount = 0.0;
   int _personCounter = 1;
+  late int _tipPercentage = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,10 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Text(
                       '\$ 90.9',
-                      style: TextStyle(
-                          color: Colors.purple.shade400,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 20.0),
+                      style: kMainLableTextStyle,
                     ),
                   ],
                 ),
@@ -64,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: Column(
                 children: [
+                  //textField
                   TextField(
                     keyboardType:
                         const TextInputType.numberWithOptions(decimal: true),
@@ -96,14 +96,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(
                     height: 10.0,
                   ),
+                  // the Split functinality
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         'Split',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blueGrey.shade300),
+                        style: kLabaleTextStyle,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -175,6 +174,53 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )),
                           ),
                         ],
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  // Tip
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Tip',
+                        style: kLabaleTextStyle,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Text(
+                          "\$ 50.00",
+                          style: TextStyle(
+                              color: Colors.purple.shade300,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 18.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "$_tipPercentage%",
+                        style: kMainLableTextStyle,
+                      ),
+                      Slider(
+                        value: _tipPercentage.toDouble(),
+                        onChanged: (double value) {
+                          setState(() {
+                            _tipPercentage = value.round();
+                          });
+                        },
+                        min: 0,
+                        max: 100,
+                        divisions: 10,
+                        inactiveColor: Colors.purple.shade100,
+                        activeColor: Colors.purple.shade400,
+                        autofocus: true,
+                        thumbColor: Colors.purple.shade800,
                       )
                     ],
                   ),
