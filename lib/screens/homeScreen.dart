@@ -92,6 +92,42 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                     },
                   ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Split',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blueGrey.shade300),
+                      ),
+                      Row(
+                        children: [
+                          InkWell(
+                            child: Container(
+                              height: 40.0,
+                              width: 40.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.grey.shade200,
+                              ),
+                              child: Center(
+                                  child: Text(
+                                "-",
+                                style: TextStyle(
+                                    color: Colors.purple.shade300,
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 30.0),
+                              )),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ],
               ),
             ),
